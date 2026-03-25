@@ -24,7 +24,7 @@ public:
 	{
 		int mod = a / b;
 
-		cout << a << " / " << b << " = " << mod << endl;
+		//cout << a << " / " << b << " = " << mod << endl;
 
 		return mod;
 	}
