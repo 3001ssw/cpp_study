@@ -18,7 +18,6 @@ TEST(MathClassTest, RandomSum)
 
 TEST(MathClassTest, RandomMod)
 {
-	srand((unsigned int)time(NULL)); // 실행할 때마다 다른 랜덤값 발생
 	for (int i = 0; i < 10000000; ++i)
 	{
 		std::random_device rd;
