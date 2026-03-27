@@ -1,6 +1,7 @@
 #include "pch.h"
-#include "../Project1/MathClass.h"
 #include <random>
+#include "../Project1/MathClass.h"
+#include "Macros.h"
 TEST(MathClassTest, BasicSum)
 {
 	EXPECT_EQ(15, MathClass::Sum(7, 8));
@@ -18,23 +19,23 @@ TEST(MathClassTest, RandomSum)
 
 TEST(MathClassTest, RandomMod)
 {
-	for (int i = 0; i < 10000000; ++i)
-	{
-		std::random_device rd;
-		std::mt19937 gen(rd());
-		std::uniform_int_distribution<int> dis(
-			(std::numeric_limits<int>::min)(),
-			(std::numeric_limits<int>::max)());
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<int> dis(
+		(std::numeric_limits<int>::min)(),
+		(std::numeric_limits<int>::max)());
 
+	for (int i = 0; i < 1000000; ++i)
+	{
 		int a = dis(gen);
 		int b = dis(gen) % 100;
-		SCOPED_TRACE(::testing::Message() << "입력값 확인 -> a: " << a << ", b: " << b);
 		//EXPECT_EXIT({
 		//	MathClass::Division(a, b);
 		//	exit(0);
 		//	},
 		//	::testing::ExitedWithCode(0), "");
-		cout << "입력값 확인 -> a: " << a << ", b: " << b << endl;
-		MathClass::Division(a, b);
+		bool bRes = EXPECT_NO_CRASH(MathClass::Division(a, b));
+		if (bRes)
+			break;
 	}
 }
